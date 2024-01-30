@@ -18,63 +18,77 @@ the function should return the results - not console.log them
 */
 
 function playRound(playerSelection, computerSelection){
+    playerSelection = playerSelection.toLowerCase()
+    computerSelection = computerSelection.toLowerCase()
     //Create a var to store the winner or tie state
     let result = ""
-    //check for winner or tie
-    function checkTie(playerSelection, computerSelection){
-        //check if the parameters are the same 
-        if(playerSelection === computerSelection){
-            return true
-        }
-        // if they are return true otherwise return false
-        return false
+    //Helper Functions
+    function capitlize(string){
+        return string[0].toUpperCase() + string.toLowerCase().slice(1)
     }
     function printWinner(winner){
-        if winner.toLowerCase() === "computer"{
+        if (winner.toLowerCase() === "computer"){
             return(
-                `Winner is: Computer! ${computerSelection} wins over ${playerSelection} !`
+                `Winner is: Computer! ${capitlize(computerSelection)} wins over ${capitlize(playerSelection)} !`
                 )
         }
         else{
             return(
-                `Winner is Player! ${playerSelection} wins over ${computerSelection}`
+                `Winner is Player! ${capitlize(playerSelection)} wins over ${capitlize(computerSelection)}`
             )
         }
     }
-    //if result is not tie
-    if(!checkTie(playerSelection, computerSelection)){
+    //check for winner or tie
+    function checkTie(playerSelection, computerSelection){
+            //check if the parameters are the same 
+            if(playerSelection === computerSelection){
+                return true
+            }
+            // if they are return true otherwise return false
+            return false
+        }
+        
+   
+            //if result is not tie
+    if(checkTie(playerSelection, computerSelection)){return result = "Tie! Try again."}
         //check winner
         //if player is rock and computer is paper - computer wins
         if(playerSelection === "rock" && computerSelection === "paper") {
-            result = printWinner("computer")
+            return result = printWinner("computer")
         }
         //if player is paper and computer is rock - player wins
         if(playerSelection === "paper" && computerSelection === "rock") {
-            result = printWinner("player")
+            return result = printWinner("player")
         }
         //if player is scissors and computer is rock - computer wins
         if(playerSelection === "scissors" && computerSelection === "rock") {
-            result = printWinner("computer")
+            return result = printWinner("computer")}
         //if player is rock and computer is scissors - player wins
         if(playerSelection === "rock" && computerSelection === "scissors") {
-            result = printWinner("player")
+            return result = printWinner("player")}
         //if player is scissors and computer is paper - player wins
         if(playerSelection === "scissors" && computerSelection === "paper") {
-            result = printWinner("player")
+            return result = printWinner("player")}
         //if player is paper and computer is scissors - computer wins
         if(playerSelection === "paper" && computerSelection === "scissors") {
-            result = printWinner("computer")
-        }
+            return result = printWinner("computer")
+        
     }else{
-        // if is tie return a tie string
-        result = "Tie! try again"
-    }
-    
-    // return the result 
-    return result
-}
+            // if is tie return a tie string
+            return result = "Error !!!"
+        }
+        
+     }
 
-
+const input = prompt("Plase enter player choice, \n Rock, Paper or Scissors").toLowerCase()
+const playerMove = input[0] === "r" ? "rock":
+                                "p" ? "paper":
+                                "s" ? "scissors":
+                                "error"
+                                 
+const computerMove = computerChoice()
+console.log(`Player: ${playerMove}, Computer: ${computerMove}`)
+console.log(playRound(playerMove, computerMove))
 
 /*
 Write a NEW function called playGame(). 
