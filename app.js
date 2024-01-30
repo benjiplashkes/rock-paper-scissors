@@ -29,15 +29,41 @@ function playRound(playerSelection, computerSelection){
         // if they are return true otherwise return false
         return false
     }
+    function printWinner(winner){
+        if winner.toLowerCase() === "computer"{
+            return(
+                `Winner is: Computer! ${computerSelection} wins over ${playerSelection} !`
+                )
+        }
+        else{
+            return(
+                `Winner is Player! ${playerSelection} wins over ${computerSelection}`
+            )
+        }
+    }
     //if result is not tie
     if(!checkTie(playerSelection, computerSelection)){
         //check winner
         //if player is rock and computer is paper - computer wins
+        if(playerSelection === "rock" && computerSelection === "paper") {
+            result = printWinner("computer")
+        }
         //if player is paper and computer is rock - player wins
+        if(playerSelection === "paper" && computerSelection === "rock") {
+            result = printWinner("player")
+        }
         //if player is scissors and computer is rock - computer wins
+        if(playerSelection === "scissors" && computerSelection === "rock") {
+            result = printWinner("computer")
         //if player is rock and computer is scissors - player wins
+        if(playerSelection === "rock" && computerSelection === "scissors") {
+            result = printWinner("player")
         //if player is scissors and computer is paper - player wins
+        if(playerSelection === "scissors" && computerSelection === "paper") {
+            result = printWinner("player")
         //if player is paper and computer is scissors - computer wins
+        if(playerSelection === "paper" && computerSelection === "scissors") {
+            result = printWinner("computer")
         }
     }else{
         // if is tie return a tie string
