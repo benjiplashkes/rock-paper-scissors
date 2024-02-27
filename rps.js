@@ -43,7 +43,7 @@ function handleClick(e){
         -------------------------------------------------------------
         ${roundWinner.toUpperCase()} WINS!!!
         `;
-        resultDiv.innerText = text
+        roundWinner !== "tie" ? resultDiv.innerText = text : resultDiv.innerText = `Round is a TIE !!!`
 
         
     }
