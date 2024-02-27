@@ -1,3 +1,7 @@
+const resultDiv = document.querySelector('#result')
+const buttons = document.querySelector('button')
+buttons.forEach(addEventListener('click', handleClick))
+
 function getComputerChoice(){
     const gameStates = ["rock", "paper", "scissors"]
     const choice = Math.floor(Math.random() * 3)
@@ -5,26 +9,6 @@ function getComputerChoice(){
     return gameStates[choice]
 }
 
-function getPlayerChoice(){
-    function getInput(err = ""){
-    let input = prompt(
-        `${err}
-        Enter your choice:
-        rock, paper or scissors`
-    )
-    result = input.toLowerCase()
-    return result
-    }
-    let choice = getInput()
-    if(choice === "rock" || choice === "paper" || choice ==="scissors"){
-        
-        return choice
-    }else {
-        getInput("Error!\n")
-    }
-    
-    
-}
 
 
 function playRound(playerChoice, computerChoice){
@@ -44,24 +28,36 @@ function playRound(playerChoice, computerChoice){
         }
     }
     const winner = checkWinner()
-    // const string = `
-    //     Player Chose ${playerChoice}
-    //     Computer Chose ${computerChoice}
-    //     ************************
-    //     The winner is ${winner}!
-    //     ************************
-    //     `
-    // const result = string
     const result = winner
     return result
+}
+function handleClick(e){
+    const playerChoice = e.target.id;
+    const computerChoice = getComputerChoice();
+
+    const roundWinner = playRound(playerChoice, computerChoice);
+    function renderWinner(playerChoice, computerChoice, roundWinner){
+        //add winner text
+        let text = `Player choice: ${playerChoice}
+        Computer Choice: ${computerChoice}
+        -------------------------------------------------------------
+        ${roundWinner.toUpperCase()} WINS!!!
+        `;
+        resultDiv.innerText = text
+
+        
+    }
+    return  renderWinner(playerChoice, computerChoice, roundWinner)
 }
 
 
 
-function playGame(rounds = 5){
+
+function playGame(){
     let playerScore = 0
     let computerScore = 0
     let tieScore = 0
+
     
     for(let index = 0; index < rounds; index ++){
         const playerChoice = getPlayerChoice()
@@ -72,10 +68,12 @@ function playGame(rounds = 5){
         if(round == "computer"){computerScore += 1}
         if(round == "tie"){tieScore += 1}
         console.log({playerScore},{computerScore}, {tieScore})
+        
+        renderRound(round, playerScore, computerScore, tieScore)
 
     }
 
-    function calcScore(){
+    function calcWinner(){
         if(tieScore === rounds || playerScore === computerScore){
             return "tie"
         }
@@ -89,9 +87,7 @@ function playGame(rounds = 5){
         return "error"
     }
 
-let winner = calcScore() + " wins!"
+let winner = calcWinner() + " wins!"
 return winner
 
 }
-
-console.log(playGame())
